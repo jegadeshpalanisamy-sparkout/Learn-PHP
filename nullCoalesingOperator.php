@@ -1,5 +1,5 @@
 <?php
-    $color="red";
+   // $color="red";
     $car="bmw";
     $user=$color ?? "no words";
     echo "$user";
