@@ -1,5 +1,5 @@
 <?php
     $arr=array("red","green","yellow");
-    echo $arr[2];
+    echo $arr[0];
 
 ?>
