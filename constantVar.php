@@ -1,11 +1,11 @@
 <?php
     
-   // echo name;
-    //echo constant("name1");
+   echo name;
+    echo constant("name1");
 
-    // constant array
-    // define("car",["red","black","blue"]);
-    // echo(car[1]);
+    constant array
+    define("car",["red","black","blue"]);
+    echo(car[1]);
 
     function dif()
     {
