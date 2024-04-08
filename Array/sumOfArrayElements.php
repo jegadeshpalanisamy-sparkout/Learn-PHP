@@ -10,7 +10,7 @@
     <label for="">How many values u need to add: <input type="text" name="input"/></label>
     <input type="submit" name="submit" value="submit"/>
 </form>
-    <?php
+     <?php
         if(isset($_GET['submit']))
         {
             $inp=$_GET['input'];
@@ -30,7 +30,8 @@
                 $arr=array();
                 for($i=0;$i<$inp;$i++)
                 {
-                    $arr[$i]=$_POST["in$i"];
+                    // $arr[$i]=$_POST["in.$i"];
+                    $arr[$i] = $_POST['in'][$i];
                 }
                 
                 foreach($arr as $s)
@@ -43,6 +44,6 @@
 
         }
         
-    ?>  
+    ?> 
 </body>
 </html>

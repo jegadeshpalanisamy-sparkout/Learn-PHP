@@ -16,7 +16,7 @@
 
 </html>
 <?php
-     $num=$_POST["num"];
+    //  $num=$_POST["num"];
     // extract($_GET);
     // echo $num;
     if($num%2==0)
