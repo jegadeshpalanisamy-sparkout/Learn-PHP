@@ -3,7 +3,7 @@ class d{
     function dis()
     {
         echo "this is multilevel inheritance";
-    }
+    }   
 }
     class A extends d{
         function display()

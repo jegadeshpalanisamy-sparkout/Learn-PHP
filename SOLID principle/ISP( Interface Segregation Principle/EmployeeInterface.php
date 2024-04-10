@@ -1,7 +1,6 @@
 <?php
-namespace emp;
-
-    interface Employee{
+    interface Employee {
         public function work();
     }
+
 ?>

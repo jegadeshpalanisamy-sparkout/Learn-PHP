@@ -1,6 +1,5 @@
 <?php
-namespace dev;
-    interface Developer{
+    interface Developer {
         public function coding();
     }
 ?>

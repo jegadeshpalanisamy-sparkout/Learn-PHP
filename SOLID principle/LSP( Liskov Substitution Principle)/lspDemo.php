@@ -8,6 +8,10 @@
 
     class Duck extends Bird
     {
+        public function fly()
+        {
+            return "cannot fly";
+        }
         public function quack()
         {
             return "Quack";
@@ -26,13 +30,11 @@
         return $bird->fly();
     }
     $duck = new Duck();
-
-    
     $penguin = new Penguin();
 
 
     echo "Duck: " . makeBirdfly($duck) . "<br>"; 
-    echo "Penguin: " . makeBirdfly($penguin) . $duck->fly()."<br>"; 
+    echo "Penguin: " . makeBirdfly($penguin) ."<br>"; 
 
 
 ?>

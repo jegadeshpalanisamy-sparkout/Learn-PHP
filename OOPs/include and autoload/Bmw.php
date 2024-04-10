@@ -3,7 +3,7 @@ include 'autoloaded.php';
 
 
 $obj = new Car("bmw", "black");
-        echo $obj->getCardetails();
+echo $obj->getCardetails();
 
 
 
