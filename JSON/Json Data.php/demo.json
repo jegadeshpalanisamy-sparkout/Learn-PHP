@@ -1,0 +1,17 @@
+[
+    {
+        "name":"BMW",
+        "color":"black",
+        "avaiable":2
+    },
+    {
+        "name":"audi",
+        "color":"red",
+        "avaiable":4
+    },
+    {
+        "name":"sukoda",
+        "color":"white",
+        "avaiable":6
+    }
+]

@@ -1,0 +1,46 @@
+[
+    {
+        "name":"Jegadesh",
+        "tamil":95,
+        "english":75,
+        "maths":100,
+        "science":95,
+        "social":99,
+        "result":{
+            "ifPass":true
+        }
+    },
+    {
+        "name":"Ram",
+        "tamil":95,
+        "english":30,
+        "maths":50,
+        "science":56,
+        "social":90,
+        "result":{
+            "ifPass":false
+        }
+    },
+    {
+        "name":"Jega",
+        "tamil":95,
+        "english":75,
+        "maths":95,
+        "science":90,
+        "social":85,
+        "result":{
+            "ifPass":true
+            
+        }
+    },  {
+        "name":"ravi",
+        "tamil":95,
+        "english":75,
+        "maths":31,
+        "science":88,
+        "social":45,
+        "result":{
+            "ifPass":false
+        }
+    }
+]
