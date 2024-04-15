@@ -1,4 +1,5 @@
 <?php 
+
     echo "<pre>";
     $jsonObj=file_get_contents('demo.json');
     $arr=json_decode($jsonObj,true);
