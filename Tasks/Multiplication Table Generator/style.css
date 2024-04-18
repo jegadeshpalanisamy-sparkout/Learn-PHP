@@ -1,0 +1,30 @@
+
+body{
+    font-style: italic;
+   
+    
+}
+label{
+    font-size: 30px;
+}
+.calcWidth{
+    width:500px;
+}
+.bgOutput{
+    background-color:black;
+    color: white;
+    
+}
+.bgForm{
+  
+    background: rgb(228,211,219);
+    background: linear-gradient(90deg, rgba(228,211,219,1) 0%, rgba(148,187,233,1) 100%);
+}
+.buttonStyle{
+    font-style: italic;
+    font-weight: bold;
+    
+
+    
+}
+

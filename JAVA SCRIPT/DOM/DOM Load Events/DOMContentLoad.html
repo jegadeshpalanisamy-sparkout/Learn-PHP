@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img{
+            width: 500px;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded',()=>{ // There is no need to wait for style sheets, graphics, or sub frames to finish loading before the DOMContentLoaded event occurs after the main HTML content has been fully loaded and processed 
+            const myApp=document.getElementById('app');
+             //    console.log(myApp);
+            const heading=myApp.children[0];
+            console.log(heading);
+            const myImg=myApp.children[1];
+            console.log(myImg);
+
+           heading.innerHTML=`<h3>Content was changed</h3>`;
+           console.log(`Image size: ${myImg.offsetWidth} ${myImg.offsetHeight}`);
+
+       
+        })
+    </script>
+</head>
+<body>
+    <div id="app">
+        <h1>Hi Welcome to Learn Dom Content Load Event</h1>
+        <img src="https://cdn.hashnode.com/res/hashnode/image/upload/v1683178441370/132aafdc-15e8-4c42-9896-8c0a430d267c.png" alt="jsDom img">
+
+    </div>
+</body>
+</html>
