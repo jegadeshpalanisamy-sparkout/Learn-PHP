@@ -1,6 +1,4 @@
-<?php 
-    session_start();
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,34 +32,43 @@
             <div class="row">
                 <input type="submit" class="btn  w-50 m-auto mt-2 btncolor" name="add"></input>
             </div>          
-            <?php          
-                if(isset($_POST['add'])){
-                    $_SESSION["key"] = $_POST['key'];
-                    $_SESSION["value"] = $_POST['value'];
-                    
-                    
-                    $addOptionsToArray=array();
-                    $addOptionsToArray[$_SESSION['key']]=$_SESSION['value'];
-                    print_r($addOptionsToArray);
-                    // array_push($addOptionsToArray,$_SESSION["key"]);
-                    // $addOptionsToArray->push($_SESSION["key"]);
-                    // print_r($addOptionsToArray);
-                    echo "<select>";
-                    
-                    foreach($addOptionsToArray as  $key => $value)
-                    {
-                        echo "<option value='".$key."'></option>";
-                    }
-                    
-                    echo "</select>";
-                }
-            ?>
+            <div class="row">
+                <div class="col">
+                    <?php                         
+                        // Check if the form is submitted
+                        if(isset($_POST['add'])) 
+                        {
+                            // Get the submitted key
+                            //$key = $_POST['key'];
+                              $key=$_POST['key'];
+                            $value=$_POST['value'];
+                           setcookie("$key","$value",time()+(86400 * 30),"/");
+                        
+                        // Display the select element with options
+                        echo "<select id='keySelection' class='w-75 mt-2'>";
+                        echo "<option disabled selected>select key</option>";
+                        foreach ($_COOKIE as $cookie_key => $value) 
+                        {
+                            echo "<option value='$cookie_key' name='$value'>$cookie_key</option>";
+                        }
+                        echo "<option value='$key' name='$value'>$key</option>";
+                        echo "</select>";
 
-   
+                    
+                    }                 
+                        
+                ?>
+               
+                </div>
+                <div class="col">
+                        
+                </div>
+                   
+                
+            </div>
             
-        
-</form>
-    </div>
+        </form>
+     </div>
 </body>
-    
+   
 </html>
