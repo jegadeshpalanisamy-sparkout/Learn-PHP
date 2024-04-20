@@ -38,37 +38,63 @@
                         // Check if the form is submitted
                         if(isset($_POST['add'])) 
                         {
-                            // Get the submitted key
-                            //$key = $_POST['key'];
-                              $key=$_POST['key'];
+                            $key=$_POST['key'];                                
                             $value=$_POST['value'];
-                           setcookie("$key","$value",time()+(86400 * 30),"/");
+                             if(isset($_COOKIE[$key]))
+                             {
+                                echo "This key is alreay there try it another key";
+                             }
+                             else{
+                                // $key=$_POST['key'];                                
+                                // $value=$_POST['value'];
+                                setcookie("$key","$value",time()+(86400 * 30),"/");
+                             }
+                             
                         
-                        // Display the select element with options
-                        echo "<select id='keySelection' class='w-75 mt-2'>";
-                        echo "<option disabled selected>select key</option>";
-                        foreach ($_COOKIE as $cookie_key => $value) 
-                        {
-                            echo "<option value='$cookie_key' name='$value'>$cookie_key</option>";
-                        }
-                        echo "<option value='$key' name='$value'>$key</option>";
-                        echo "</select>";
-
-                    
+                             
+                             echo "<select id='keySelection' class='w-75 mt-2' onChange='updateValue()'>";
+                             echo "<option disabled selected>select key</option>";
+                             foreach ($_COOKIE as $cookie_key => $value) 
+                                {
+                                    echo "<option value='$value' name='$value'>$cookie_key</option>";
+                                }
+                            
+                            
+                             echo "<option value='$value' name='$value'>$key</option>";
+                             echo "</select>";
+                   
                     }                 
                         
                 ?>
                
                 </div>
-                <div class="col">
+                <div class="col bg-light " id="value">
                         
                 </div>
-                   
+                
                 
             </div>
             
         </form>
+        <form action="index.php" method='post'>
+           <center> <input type="submit" value="Addt to file" name="addTofile"></center>
+        </form>
+        <?php 
+            if(isset($_POST['addTofile']))
+            {
+                $file=fopen('cookieStorageDetails.txt','w') or die("File is not there");
+                foreach($_COOKIE as $key=>$value)
+                {
+
+                    fwrite($file,"$key=>$value\n");
+                    
+                }
+                
+                
+            }
+        ?>
      </div>
+     <script src="script.js"></script>
 </body>
    
 </html>

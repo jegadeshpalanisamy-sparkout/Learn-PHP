@@ -18,11 +18,11 @@
                         <div class="row">
                             <div class="col">
                                 
-                            <center class="mt-2"><span>Start Date:</span><br><input type="date" class="shadow bg-light dateBox m-0" name="date1"></center> 
+                            <center class="mt-2"><span>Start Date:</span><br><input type="date" class="shadow bg-light dateBox m-0" name="date1" required></center> 
                                 
                             </div>
                             <div class="col">
-                                <center class="mt-2"><span>End Date:</span><br> <input type="date" class="shadow bg-light dateBox m-0" name="date2"></center> 
+                                <center class="mt-2"><span>End Date:</span><br> <input type="date" class="shadow bg-light dateBox m-0" name="date2" required></center> 
                             </div>
                             
                         </div>
