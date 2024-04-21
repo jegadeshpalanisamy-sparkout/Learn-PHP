@@ -10,27 +10,27 @@
     <title>Checking key and value pair</title>
 </head>
 <body>
-    <div class="container p-2 bg-secondary">
+    <div class="container p-2  background">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="row m-auto widthForm" method="post" >
-            <h3 class="text-center">Checking Key Value Pairs</h3>
+            <h3 class="text-center ">Checking Key Value Pairs</h3>
             <div class="row">
                 <div class="col text-center">
-                    <label for="" class="form-label bg-light">Key</label>
+                    <label for="" class="form-label bg-light" >Key:</label>
                 </div>
                 <div class="col text-center">
-                    <label for="" class="form-label bg-light">value</label>
+                    <label for="" class="form-label bg-light">value:</label>
                 </div>
             </div>
             <div class="row">
                 <div class="col text-center">
-                    <input type="text" class="form-control  m-auto" name="key" required></input>
+                    <input type="text" class="form-control  m-auto" placeholder="Enter Key" name="key" required></input>
                 </div>
                 <div class="col text-center">
-                    <input type="text" class="form-control  m-auto" name="value" required></input>
+                    <input type="text" class="form-control  m-auto" placeholder="Enter Value"name="value" required></input>
                 </div>
             </div>
             <div class="row">
-                <input type="submit" class="btn  w-50 m-auto mt-2 btncolor" name="add"></input>
+                <center><input type="submit" class="btn  w-25 m-auto mt-4 btncolor" name="add"></input></center>
             </div>          
             <div class="row">
                 <div class="col">
@@ -40,44 +40,51 @@
                         {
                             $key=$_POST['key'];                                
                             $value=$_POST['value'];
-                             if(isset($_COOKIE[$key]))
+                             if(isset($_COOKIE[$key]) && isset($_POST['add']))
                              {
-                                echo "This key is alreay there try it another key";
+                                echo "<script type='text/javascript'>alert('This key already exists try another Key!')</script>";
+                                
                              }
                              else{
                                 // $key=$_POST['key'];                                
                                 // $value=$_POST['value'];
                                 setcookie("$key","$value",time()+(86400 * 30),"/");
+                                echo "<center><select id='keySelection' class=' mt-4' onChange='updateValue()'>";
+                                echo "<option disabled selected>select key</option>";
+                                foreach ($_COOKIE as $cookie_key => $value) 
+                                    {
+                                        echo "<option value='$value' name='$value'>$cookie_key</option>";
+                                    }
+                                
+                                
+                                echo "<option value='$value' name='$value'>$key</option>";
+                                echo "</select></center>";
                              }
                              
                         
                              
-                             echo "<select id='keySelection' class='w-75 mt-2' onChange='updateValue()'>";
-                             echo "<option disabled selected>select key</option>";
-                             foreach ($_COOKIE as $cookie_key => $value) 
-                                {
-                                    echo "<option value='$value' name='$value'>$cookie_key</option>";
-                                }
-                            
-                            
-                             echo "<option value='$value' name='$value'>$key</option>";
-                             echo "</select>";
+                             
                    
                     }                 
                         
                 ?>
                
                 </div>
-                <div class="col bg-light " id="value">
-                        
-                </div>
+                
                 
                 
             </div>
             
+            
         </form>
+        
+                <div class="col bg-light output mt-4 w-25"  id="value">
+                                
+                </div>
+        
+        
         <form action="index.php" method='post'>
-           <center> <input type="submit" value="Addt to file" name="addTofile"></center>
+           <center> <input type="submit" value="Add to file" name="addTofile" class="btn w-25 addbtn btn-primary"></center>
         </form>
         <?php 
             if(isset($_POST['addTofile']))
@@ -89,11 +96,12 @@
                     fwrite($file,"$key=>$value\n");
                     
                 }
+                echo "<script type='text/javascript'>alert('Details are added successfully')</script>";
                 
                 
             }
         ?>
-     </div>
+ </div>
      <script src="script.js"></script>
 </body>
    
