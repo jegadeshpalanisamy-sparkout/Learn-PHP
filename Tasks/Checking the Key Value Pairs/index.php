@@ -59,19 +59,13 @@
                                 
                                 echo "<option value='$value' name='$value'>$key</option>";
                                 echo "</select></center>";
-                             }
-                             
+                             }                      
                         
-                             
-                             
-                   
                     }                 
                         
                 ?>
                
                 </div>
-                
-                
                 
             </div>
             
@@ -102,7 +96,7 @@
             }
         ?>
  </div>
-     <script src="script.js"></script>
+     <script defer src="script.js"></script>
 </body>
    
 </html>
