@@ -1,4 +1,8 @@
+boy=>girl
+jega=>hello
+moorthi=>hello
+hii=>hii
+jana=>jega
+ram=>john
+jegadesh=>janani
 Dhoni=>csk
-Rohit=>Mi
-Russel=>KKR
-Virat=>RCB

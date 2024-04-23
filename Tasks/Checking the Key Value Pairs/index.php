@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,12 +9,12 @@
     <title>Checking key and value pair</title>
 </head>
 <body>
-    <div class="container p-2  background">
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="row m-auto widthForm" method="post" >
-            <h3 class="text-center ">Checking Key Value Pairs</h3>
+    <div class="container p-2 background">
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" class="row m-auto widthForm" method="post">
+            <h3 class="text-center">Checking Key Value Pairs</h3>
             <div class="row">
                 <div class="col text-center">
-                    <label for="" class="form-label bg-light" >Key:</label>
+                    <label for="" class="form-label bg-light">Key:</label>
                 </div>
                 <div class="col text-center">
                     <label for="" class="form-label bg-light">value:</label>
@@ -23,14 +22,14 @@
             </div>
             <div class="row">
                 <div class="col text-center">
-                    <input type="text" class="form-control  m-auto" placeholder="Enter Key" name="key" required></input>
+                    <input type="text" class="form-control m-auto" placeholder="Enter Key" name="key" required></input>
                 </div>
                 <div class="col text-center">
-                    <input type="text" class="form-control  m-auto" placeholder="Enter Value"name="value" required></input>
+                    <input type="text" class="form-control m-auto" placeholder="Enter Value" name="value" required></input>
                 </div>
             </div>
             <div class="row">
-                <center><input type="submit" class="btn  w-25 m-auto mt-4 btncolor" name="add"></input></center>
+                <center><input type="submit" class="btn w-25 m-auto mt-4 btncolor" name="add"></input></center>
             </div>          
             <div class="row">
                 <div class="col">
@@ -38,66 +37,45 @@
                         // Check if the form is submitted
                         if(isset($_POST['add'])) 
                         {
-                            $key=$_POST['key'];                                
-                            $value=$_POST['value'];
-                             if(isset($_COOKIE[$key]) && isset($_POST['add']))
-                             {
+                            $key = $_POST['key'];                                
+                            $value = $_POST['value'];
+                            if(isset($_COOKIE[$key]))
+                            {
                                 echo "<script type='text/javascript'>alert('This key already exists try another Key!')</script>";
-                                
-                             }
-                             else{
-                                // $key=$_POST['key'];                                
-                                // $value=$_POST['value'];
+                            }
+                            else
+                            {
                                 setcookie("$key","$value",time()+(86400 * 30),"/");
-                                echo "<center><select id='keySelection' class=' mt-4' onChange='updateValue()'>";
+                                echo "<center><select id='keySelection' class='mt-4' onChange='updateValue()'>";
                                 echo "<option disabled selected>select key</option>";
-                                foreach ($_COOKIE as $cookie_key => $value) 
-                                    {
-                                        echo "<option value='$value' name='$value'>$cookie_key</option>";            
-                                    }
-                                
-                                
-                                echo "<option value='$value' name='$value'>$key</option>";
+                                foreach ($_COOKIE as $cookie_key => $cookie_value)
+                                {
+                                    echo "<option value='$cookie_value'>$cookie_key</option>";
+                                }
+                                echo "<option value='$value'>$key</option>";
                                 echo "</select></center>";
-                                
-                             }                      
-                        
-                    }                 
-                        
-                ?>
-               
+                            }                      
+                        }                 
+                    ?>
                 </div>
-                
             </div>
-            
-            
         </form>
-        
-                <div class="col bg-light output mt-4 w-25"  id="value">
-                                
-                </div>
-        
-        
+        <div class="col bg-light output mt-4 w-25" id="value"></div>
         <form action="index.php" method='post'>
-           <center> <input type="submit" value="Add to file" name="addTofile" class="btn w-25 addbtn btn-primary"></center>
+            <center><input type="submit" value="Add to file" name="addTofile" class="btn w-25 addbtn btn-primary"></center>
         </form>
         <?php 
             if(isset($_POST['addTofile']))
             {
-                $file=fopen('cookieStorageDetails.txt','w') or die("File is not there");
-                foreach($_COOKIE as $key=>$value)
+                $file = fopen('cookieStorageDetails.txt','w') or die("File is not there");
+                foreach($_COOKIE as $key => $value)
                 {
-
                     fwrite($file,"$key=>$value\n");
-                    
                 }
                 echo "<script type='text/javascript'>alert('Details are added successfully')</script>";
-                
-                
             }
         ?>
- </div>
-     <script defer src="script.js"></script>
+    </div>
+    <script defer src="script.js"></script>
 </body>
-   
 </html>
