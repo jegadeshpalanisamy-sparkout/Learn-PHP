@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+    <div>
+        <p class="on">Hii..when you hover me to function was started</p>
+        <button class="off">Click me to function was off</button>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $('.on').on('click',function(){
+               alert("hii");
+            })
+
+            $('.off').click(function(){
+                $('.on').off('click');
+            })
+        })
+    </script>
+</body>
+</html>

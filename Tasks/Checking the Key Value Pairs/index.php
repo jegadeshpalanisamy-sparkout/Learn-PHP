@@ -53,12 +53,13 @@
                                 echo "<option disabled selected>select key</option>";
                                 foreach ($_COOKIE as $cookie_key => $value) 
                                     {
-                                        echo "<option value='$value' name='$value'>$cookie_key</option>";
+                                        echo "<option value='$value' name='$value'>$cookie_key</option>";            
                                     }
                                 
                                 
                                 echo "<option value='$value' name='$value'>$key</option>";
                                 echo "</select></center>";
+                                
                              }                      
                         
                     }                 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+    <p>This is Window Resize method <span>0</span></p>
+</body>
+<script>
+    $(document).ready(function(){
+        let a=0;
+        $(window).resize(function(){
+            $("span").text(a+=1)
+        })
+    })
+</script>
+</html>

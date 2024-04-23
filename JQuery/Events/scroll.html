@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+    <div style="border:2px solid black;height:100px;width:100px;overflow: scroll;">
+        <p>helo</p>
+        <p>helo</p>
+        <p>helo</p>
+        <p>helo</p>
+        <p>helo</p>
+        <p>helo</p>       
+        <p>helo</p>
+        <p>helo</p>
+        <p>helo</p>
+        <p>helo</p>
+        <p>helo</p>
+        <p>helo</p>
+
+    </div>
+    <h1><span>0</span> times scrolled</h1>
+    <script>
+        $(document).ready(function(){
+            x=0;
+            $('div').scroll(function(){
+                $('span').text(x+=1)
+            })
+        })
+    </script>
+</body>
+</html>
