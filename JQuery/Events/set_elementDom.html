@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery.js"></script>
+</head>
+<body>
+    <p id="text1">hii</p>
+    <p id="text2">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa, quasi?</p>
+    <h3>Lorem ipsum dolor sit amet.</p></h3>
+    <input id="text3">
+    <button id="b1">text</button>
+    <button id="b2">html</button>
+    <button id="b3">input</button>
+    <script>
+        $(document).ready(function(){
+            $("#b1").click(function(){
+                $("#text1").text("hello");
+            })
+
+            $("#b2").click(function(){
+                $("#text2").html("<b>how are you</b>")
+            })
+
+            $("#b3").click(function(){
+                $("#text3").val("hiii");
+            })
+
+            
+        })
+    </script>
+</body>
+</html>

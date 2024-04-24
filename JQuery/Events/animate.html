@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jquery.js"></script>
+    <style>
+        .main{
+            width: 200px;
+            height: 300px;
+            border: 2px solid ;
+            background-color: aquamarine;
+        }
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+          
+        }
+        .sub2{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <p class="sub1">Click to see more</p>
+        <p class="sub2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum itaque officia necessitatibus similique ea sequi nostrum
+             aperiam nemo quis atque id commodi, cupiditate debitis enim facere. Commodi similique praesentium molestiae?</p>
+
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".main").click(function(){
+                $(".main").animate({
+                    width:'400px',
+                                     
+                },"slow")
+                $(".sub2").show().animate({
+                    opacity:'0.5'
+                },3000)
+            })
+        })
+    </script>
+</body>
+</html>

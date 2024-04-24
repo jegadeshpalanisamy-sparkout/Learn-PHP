@@ -30,7 +30,8 @@
             </div>
             <div class="row">
                 <center><input type="submit" class="btn w-25 m-auto mt-4 btncolor" name="add"></input></center>
-            </div>          
+            </div>
+                      
             <div class="row">
                 <div class="col">
                     <?php                         
@@ -42,6 +43,7 @@
                             if(isset($_COOKIE[$key]))
                             {
                                 echo "<script type='text/javascript'>alert('This key already exists try another Key!')</script>";
+                               
                             }
                             else
                             {
