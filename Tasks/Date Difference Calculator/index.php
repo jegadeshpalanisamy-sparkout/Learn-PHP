@@ -18,11 +18,11 @@
                         <div class="row">
                             <div class="col">
                                 
-                            <center class="mt-2"><span>Start Date:</span><br><input type="date" class="shadow bg-light dateBox m-0" name="date1" required></center> 
+                            <center class="mt-2"><span>Start Date:</span><br><input type="date" class="shadow bg-light dateBox m-0" name="date1" value="<?php echo isset($_POST['date1'])?$_POST['date1']:'';?>" required></center> 
                                 
                             </div>
                             <div class="col">
-                                <center class="mt-2"><span>End Date:</span><br> <input type="date" class="shadow bg-light dateBox m-0" name="date2" required></center> 
+                                <center class="mt-2"><span>End Date:</span><br> <input type="date" class="shadow bg-light dateBox m-0" name="date2" value="<?php echo isset($_POST['date2'])?$_POST['date2']:"";?>"required></center> 
                             </div>
                             
                         </div>
@@ -38,8 +38,10 @@
                                             $date1=new DateTime($_POST['date1']);
                                             $date2=new DateTime($_POST['date2']);
                                             $difference=$date1->diff($date2);
-                                            echo "Difference: ". $difference->format('%R %y years,%m months,%d days');
-                                            
+                                            $year=$difference->y>1?"years":'year';
+                                            $month=$difference->m>1?'months':'month';
+                                            $day=$difference->d>1?'days':'day';                    
+                                            echo "Difference: ".$difference->format('%R').$difference->y." ".$year." ".$difference->m." ".$month." ".$difference->d." ".$day;
                                         }
 
                                     

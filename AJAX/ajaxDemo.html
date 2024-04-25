@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax demo</title>
+</head>
+<body>
+        <center>
+            <button id="b">Click me to ClassOne details</button>
+            <div id="output"></div>
+        </center>
+
+        <script>
+            let fileName="One";
+            document.getElementById("b").addEventListener("click",demo);
+            function demo(){
+               
+                let reqObj=new XMLHttpRequest();
+                 reqObj.open("GET","class"+fileName+".json",true);
+                 reqObj.onreadystatechange=function(){
+                    
+                    if(this.readyState==4 && this.status==200)
+                    {
+                        console.log("hii");
+                        f1=JSON.parse(reqObj.responseText);
+                        f2=f1.class;
+                        t=" ";
+                        for(let i=0;i<f2.length;i++)
+                        {
+                            t+="<br>"+"Name:"+f2[i].name+",Grade:"+f2[i].grade;
+                        }
+                        document.getElementById("output").insertAdjacentHTML("beforeend",t+"<hr>");
+                        
+                        document.getElementById("b").innerHTML="Click me to Class"+fileName+" details";
+                    }
+                 }
+                 reqObj.send();
+                 if(fileName=="One")
+                 {
+                    fileName="Two";
+                 }
+                 else if(fileName=="Two")
+                 {
+                    fileName="Three";
+
+                 }
+                 else{
+                    document.getElementById("b").style.visibility="hidden";
+                 }
+
+            }
+            
+            
+        </script>
+</body>
+</html>

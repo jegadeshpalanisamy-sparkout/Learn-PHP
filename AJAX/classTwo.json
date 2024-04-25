@@ -1,0 +1,12 @@
+{
+    "class":[
+        {
+            "name":"Tharun",
+            "grade":"A"
+        },
+        {
+            "name":"Kavin",
+            "grade":"B"
+        }
+    ]
+}
