@@ -8,15 +8,21 @@ if (isset($_POST['add_product'])) {
     $productImg_folder = 'uploadImg/' . $productImg;
     $productDesc = $_POST['desc'];
     $productCategory = $_POST['category'];
+    echo $productCategory;
+    $getCategoryId=mysqli_query($con,"SELECT category_id from category where category_name='$productCategory'");
+    $categoryRow = mysqli_fetch_assoc($getCategoryId);
+    $categoryID = $categoryRow['category_id'];
 
-    if (empty($productName) || empty($productPrice) || empty($productImg) || empty($productDesc) || empty($productCategory)) {
+
+    if (empty($productName) || empty($productPrice) || empty($productImg) || empty($productDesc) || empty($categoryID)) {
         $msg[] = "please fill out all";
     } else {
-        $insert = "INSERT INTO product(name,price,image,description,categories) VALUES ('$productName','$productPrice','$productImg','$productDesc','$productCategory')";
+        $insert = "INSERT INTO product(name,price,image,description,categories_id) VALUES ('$productName','$productPrice','$productImg','$productDesc','$categoryID')";
         $executeQuery = mysqli_query($con, $insert);
         if ($executeQuery) {
             move_uploaded_file($productImg_tempName, $productImg_folder);
             $msg[] = "New product added successfully";
+            header('location:addProduct.php');
         } else {
             $msg[] = "Could not be add the product";
         }
@@ -72,8 +78,9 @@ if(isset($_GET['delete']))
                     <div class="row"><input type="number" placeholder="Enter Price" class="form-control mb-2 w-75 m-auto" name="price" required></div>
                     <div class="row"><input type="text" placeholder="Enter Description" class="form-control mb-2 w-75 m-auto" name="desc" required></div>
                     <div class="row">
-                        <!-- <input type="text" placeholder="Enter Category" class="form-control mb-2 w-75 m-auto" name="category"> -->
-                        <select name="cat" id="">
+                        
+                        <select name="category" id="" class="w-50 m-auto mb-2 form-select">
+                            <option value="">select category</option>
                             <?php
                                 $sql_select=mysqli_query($con,"SELECT category_name FROM category");
                                 while($row=mysqli_fetch_assoc($sql_select))
@@ -81,7 +88,7 @@ if(isset($_GET['delete']))
 
                                
                             ?>
-                            <option value="<?php echo $row['category_name'] ?>"></option>
+                            <option value="<?php echo $row['category_name'] ?>"><?php echo $row['category_name'] ?></option>
                             
                             </option>
                             <?php }?>
@@ -89,14 +96,18 @@ if(isset($_GET['delete']))
                     </div>
                     <div class="row"><input type="file" class="form-control text w-50 m-auto" name="productImg" required></div>
 
-                    <div class="row"><input type="submit" class="btn btn-primary w-25 m-auto mt-4" name="add_product" value="Add Product"></div>
+                    <div class="row"><input type="submit" class="btn btn-success w-25 m-auto mt-4" name="add_product" value="Add Product"></div>
+                   <!-- / <div class="row"><a href="admin_dashboard.php" class="btn btn-primary w-25 m-auto mt-4">Go Back</a></div> -->
+
+
 
                 </form>
 
 
             </div>
             <?php
-            $view_Product_query = mysqli_query($con, "SELECT * FROM product");
+            $view_Product_query = mysqli_query($con, "SELECT * FROM product inner join category ON product.categories_id=category.category_id");
+            
 
             ?>
 
@@ -109,7 +120,7 @@ if(isset($_GET['delete']))
                     <th scope="col">Product Name</th>
                     <th scope="col">Price</th>                    
                     <th scope="col">Description</th>
-                    <th scope="col">Category</th>
+                    <th scope="col">Category Name</th>
                     <th scope="col-2">Action</th>
                 </tr>
             </thead>
@@ -125,7 +136,8 @@ if(isset($_GET['delete']))
                     <td><?php echo $row['name']?></td>
                     <td><?php echo $row['price']?>/-</td>
                     <td><?php echo $row['description']?></td>
-                    <td><?php echo $row['categories']?></td>
+                    <td><?php echo $row['category_name']?></td>
+                    
                     <td>
                        <a href="edit_product.php?edit=<?php echo $row['id'];?>"class="btn btn-warning"><i class="fa fa-edit me-1" style="font-size:15px;"></i>Edit</a>
                         <a href="addProduct.php?delete=<?php echo $row['id'];?>" class="btn btn-danger"><i class="fa fa-trash me-1" style="font-size:15px;color:white"></i>Delete</a>

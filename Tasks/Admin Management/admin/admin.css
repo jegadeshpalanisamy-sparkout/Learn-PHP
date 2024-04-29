@@ -2,10 +2,16 @@
     
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-.sidebar-width{
-    width: 200px;
-    height:100vh;
+.main-content{
+    display: flex;
+    margin-top: 6rem;
 }
-.sidebar{
-    margin-top:60px;
+#mainId {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 2rem;
+    gap: 2rem;
+}
+.child{
+    width: 200px;
 }

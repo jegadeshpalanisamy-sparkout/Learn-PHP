@@ -11,11 +11,18 @@ if (isset($_POST['update_product'])) {
     $productImg_folder = 'uploadImg/' . $productImg;
     $productDesc = $_POST['desc'];
     $productCategory = $_POST['category'];
+    
+     $getCategoryId=mysqli_query($con,"SELECT distinct category_name from category where category_name='$productCategory'");
+     $categoryID = '';
+    //  while($categoryRow = mysqli_fetch_assoc($getCategoryId)){
+       echo $categoryID =$productCategory;
+    //  }
 
-    if (empty($productName) || empty($productPrice) || empty($productDesc) || empty($productCategory)) {
+
+    if (empty($productName) || empty($productPrice) || empty($productDesc)) {
         $msg[] = "please fill out all";
     } else {
-        $update = "UPDATE product SET name='$productName',price='$productPrice',image='$productImg',description='$productDesc',categories='$productCategory' WHERE id=$id";
+        $update = "UPDATE product SET name='$productName',price='$productPrice',image='$productImg',description='$productDesc', categories_id='$categoryID' WHERE id=$id";
         $executeQuery = mysqli_query($con, $update);
         if ($executeQuery) {
             move_uploaded_file($productImg_tempName, $productImg_folder);
@@ -68,20 +75,35 @@ if (isset($_POST['update_product'])) {
                         <div class="row"><input type="text" placeholder="Enter Product Name" value="<?php echo $row['name']; ?>" class="form-control mb-2 w-75 m-auto" name="productName" required></div>
                         <div class="row"><input type="number" placeholder="Enter Price" value="<?php echo $row['price'] ?>" class="form-control mb-2 w-75 m-auto" name="price" required></div>
                         <div class="row"><input type="text" placeholder="Enter Description" value="<?php echo $row['description'] ?>" class="form-control mb-2 w-75 m-auto" name="desc" required></div>
-                        <div class="row"><input type="text" placeholder="Enter Category" value="<?php echo $row['categories'] ?>" class="form-control mb-2 w-75 m-auto" name="category"></div>
-                        <div class="row">
-                            <label for="productImg" class="form-label">Update Image:</label><input type="file" class="form-control text w-50 m-auto" name="productImg">
-                        </div>
-
-                        <div class="row"><input type="submit" class="btn btn-warning w-25 m-auto mt-4" name="update_product" value="Update"></div>
-                        <div class="row"><a href="addProduct.php" class="btn btn-primary w-25 m-auto mt-4">Go Back</a></div>
-
-
-
-                </form>
-            <?php } ?>
+                        <select title="ctegru" name="category" id="" class="w-50 m-auto mb-2 form-select">
+                            <?php
+                            $selectedCategory = $row['categories_id'];
+                            $sql_select = mysqli_query($con, "SELECT category_name, category_id FROM category");
+                            while ($catRow = mysqli_fetch_assoc($sql_select)) {
+                                
+                                $categoryId = $catRow['category_id'];
+                                $categoryName = $catRow['category_name'];
+                                $selected = ($selectedCategory ==  $categoryId) ? 'selected' : '';
+                                echo "<option value='$categoryId' $selected>$categoryName</option>";
+                            }
+                            ?>
+                        </select>
 
             </div>
+
+            <div class="row">
+                <label for="productImg" class="form-label">Update Image:</label><input type="file" class="form-control text w-50 m-auto" name="productImg">
+            </div>
+
+            <div class="row"><input type="submit" class="btn btn-warning w-25 m-auto mt-4" name="update_product" value="Update"></div>
+            <div class="row"><a href="addProduct.php" class="btn btn-primary w-25 m-auto mt-3 mb-2">Go Back</a></div>
+
+
+
+            </form>
+        <?php } ?>
+
+        </div>
 
 </body>
 
