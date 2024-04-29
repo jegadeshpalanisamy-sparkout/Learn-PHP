@@ -1,0 +1,11 @@
+*{
+    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.sidebar-width{
+    width: 200px;
+    height:100vh;
+}
+.sidebar{
+    margin-top:60px;
+}

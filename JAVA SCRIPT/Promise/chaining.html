@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        const UserName=new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                name='jega';
+                if(name)
+                {
+                    resolve(name);
+                }
+                else{
+                    reject("Name is not there");
+                }
+            },3000)
+           
+        })
+        function userDetails(input){
+           return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                details=[{"name":"jega","age":21}];
+                const user=details.find(user=>user.name===input)
+                if(user)
+                {
+                    resolve(user);
+                }
+                else{
+                    reject("details was rejected");
+                }
+
+            },2000)
+        })
+        
+        
+
+        }
+        
+
+        UserName.then((inp)=>{console.log(inp)
+            return userDetails(inp);
+        }).then((userDetail)=>{
+            console.log(userDetail);
+        })
+        .catch((err)=>console.log(err))
+        .finally(()=>{
+            console.log("finally was executed")
+        })
+    </script>
+</body>
+</html>

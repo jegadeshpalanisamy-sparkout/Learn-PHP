@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let matchResult=new Promise((resolve,reject)=>{
+          let won=false;
+            if(won)
+            {
+                resolve(5);
+            }
+            else{
+                reject(50);
+            }
+        });
+
+
+      matchResult.then((diff)=>console.log(`Ind won the match ${diff} wicket`))
+      .catch((diff)=>console.log(`Ind loss the match ${diff} runs`));
+    </script>
+  </body>
+</html>

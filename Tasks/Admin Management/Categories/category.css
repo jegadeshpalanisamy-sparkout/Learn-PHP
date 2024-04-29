@@ -1,0 +1,41 @@
+*{
+    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.main-form{
+    width: 450px;
+    border-radius: 20px;
+    background-color: rgb(221, 223, 225);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 20px;
+}
+
+
+.text{
+    font-size: 14px;
+}
+.error-msg{
+    
+    background-color: crimson;
+    color:white;
+    border-radius: 5px; 
+    border-radius: 10px;
+    
+}
+.success-msg{
+  
+    background-color: green;
+    color:white;
+    border-radius: 5px; 
+    border-radius: 10px;   
+}
+.table-style{
+    /* background-color: rgb(221, 223, 225);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 20px;
+    
+    */
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    
+
+}

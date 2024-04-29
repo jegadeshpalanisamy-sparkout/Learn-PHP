@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../../JQuery/jquery.js"></script>
+</head>
+<body>
+
+    <input type="button" id="btn" value="click">
+    <div id="output"></div>
+    <p></p>
+    <script>
+        $(document).ready(function(){
+            $(document).click(function(){
+                $.ajax({
+                url:"get_val.php",
+                type:"POST",
+                data:{name:"john",age:"22"},
+                dataType:"html",
+                beforeSend:function(){
+                    $("#output").text("Loading....");
+                },
+                success:function(res){
+                    $("#output").html(res);
+                },
+                error:function(xhr,txt,error){
+                    $("#output").text(error);
+                },
+                complete:function(){
+                    $("p").text("Ajax was run successfully")
+                }
+            });
+
+            })
+           
+        })
+    </script>
+</body>
+</html>

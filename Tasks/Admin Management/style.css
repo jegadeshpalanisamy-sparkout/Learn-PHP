@@ -1,0 +1,46 @@
+*{
+    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Set height to occupy the full viewport height */
+    
+}
+
+
+.error-msg{
+    
+    background-color: crimson;
+    color:white;
+    border-radius: 5px; 
+    
+}
+.form-width{
+    width:30vw;
+    
+   }
+.err-width{
+   border-radius: 40px;
+}
+.form-border{
+    padding: 15px;
+    height: 300px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 20px;
+}
+.signform-border{
+    padding: 15px;
+    height: fit-content;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+    border-radius: 20px;
+}
+.btn-clr input{
+    background-color: rgb(38, 178, 38);
+    color: white;
+}
+.btn-clr input:hover{
+    background-color: rgb(79, 228, 79);
+}

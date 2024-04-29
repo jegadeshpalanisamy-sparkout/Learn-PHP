@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const person1= new Promise((resolve,reject)=>{
+                const reach=true;
+                if(reach==true)
+                {
+                    setTimeout(resolve,3000,"Abishek was reached");
+                }
+                else{
+                    reject("Abishek was not reached");
+                }
+            })
+        const person2=new Promise((resolve,reject)=>{
+            const reach=true;
+            if(reach==true)
+            {
+                setTimeout(resolve,4000,"kavin was reached")
+            }
+            else{
+                reject("Kavin was not reached");
+            }
+        })
+        const person3=new Promise((resolve,reject)=>{
+            const reach=true;
+            if(reach==true)
+            {
+                setTimeout(resolve,4000,"Madhan was reached");
+            }
+            else{
+                reject("Madhan was not reached");
+            }
+        })
+        //fullfils when all promise fullfil when reject if any promise reject
+        Promise.all([person1,person2,person3])
+            .then((msg)=>console.log(msg))
+            .catch((msg)=>console.log(msg));
+
+        //when fullfil all promises are settled
+        // Promise.allSettled([person1,person2,person3])
+        //     .then((msg)=>console.log(msg))
+        //     .catch((msg)=>console.log(msg));
+
+        //when fullfill 1st return any promises fullfil,if not when return any promises reject
+            // Promise.any([person1,person2,person3])
+            // .then((msg)=>console.log(msg))
+            // .catch((msg)=>console.log(msg));
+
+            // when 1st return any promises rejects,if not rejection return 1st resolve
+            // Promise.race([person1,person2,person3])
+            // .then((msg)=>console.log(msg))
+            // .catch((msg)=>console.log(msg));
+    </script>
+    
+</body>
+</html>
