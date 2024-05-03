@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\productController;
+use App\Http\Controllers\products;
 use App\Http\Controllers\test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -120,3 +122,9 @@ Route::get('logout',[test::class,'logout']);
 
 Route::view('homepg','homepg');
 Route::view('contactpg','contact');
+
+//CRUD
+Route::get('product',[productController::class,'show'])->name('welcome');
+Route::get('product/create',[productController::class,'index'])->name('index');
+Route::post('product',[productController::class,'store'])->name('store');
+Route::get('product/{product}/edit',[productController::class,'edit'])->name('edit');
