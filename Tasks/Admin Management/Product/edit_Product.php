@@ -11,11 +11,11 @@ if (isset($_POST['update_product'])) {
     $productImg_folder = 'uploadImg/' . $productImg;
     $productDesc = $_POST['desc'];
     $productCategory = $_POST['category'];
-    
-     $getCategoryId=mysqli_query($con,"SELECT distinct category_name from category where category_name='$productCategory'");
-     $categoryID = '';
+
+    $getCategoryId = mysqli_query($con, "SELECT distinct category_name from category where category_name='$productCategory'");
+    $categoryID = '';
     //  while($categoryRow = mysqli_fetch_assoc($getCategoryId)){
-       echo $categoryID =$productCategory;
+     $categoryID = $productCategory;
     //  }
 
 
@@ -27,7 +27,12 @@ if (isset($_POST['update_product'])) {
         if ($executeQuery) {
             move_uploaded_file($productImg_tempName, $productImg_folder);
             $msg[] = "Product was updated successfully";
-            header('location:addProduct.php');
+            foreach ($msg as $msg)
+            {
+                echo "<script>alert('".$msg."');</script>";
+            }
+            echo "<script>window.location.href = 'addProduct.php';</script>"; 
+            // header('location:addProduct.php');
         } else {
             $msg[] = "Could not be update the product";
         }
@@ -50,19 +55,56 @@ if (isset($_POST['update_product'])) {
 
 <body>
     <div class="container ">
+        <div>
+
+
+            <nav class="navbar navbar-expand-lg bg-secondary shadow  fixed-top" data-bs-theme="light">
+                <div class="container-fluid">
+                    <a class="navbar-brand text-light" href="#">Admin Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item btn btn-primary btn-sm me-3 p-0">
+                                <a class="nav-link text-light " aria-current="page" href="../admin/admin_dashboard.php"><i class="fa fa-home me-1" style="font-size:20pxpx;color:white"></i>Home</a>
+                            </li>
+
+                        </ul>
+                        <div class="d-flex">
+
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <button class="btn btn-primary btn-sm me-3 p-0"><a class="nav-link text-light  " aria-current="page" href="../Product/addProduct.php"><i class="fa fa-cart-plus me-1" style="font-size:14px;color:white"></i>Add Product</a></button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="btn btn-primary btn-sm me-3 p-0"><a class="nav-link text-light  " aria-current="page" href="../Categories/addCategories.php"><i class="fa fa-pencil me-1" style="font-size:15px;color:white"></i>Categories</a></button>
+                                </li>
+                                <li class="nav-item">
+                                    <button class="btn btn-danger  btn-sm p-0"><a class="nav-link text-light" aria-current="page" href="../index.php">Logout</a></button>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </nav>
+            <div class=" mt-5"></div>
+        </div>
         <div class="main-form  m-auto text-center row">
             <div class="col p-4">
                 <form action="" class="form-group" enctype="multipart/form-data" method="POST">
                     <?php
-                    if (isset($msg)) {
-                        foreach ($msg as $msg) {
-                            if ($msg == "Could not be add the product") {
-                                echo "<div class='bg-danger text-center err-width rounded-2'><span class='error-msg'>$msg</span></div>";
-                            } else {
-                                echo "<div class='success-msg text-center err-width rounded-2'><span class='success-msg text-light'>$msg</span></div>";
-                            }
-                        }
-                    }
+                    // if (isset($msg)) {
+                    //     foreach ($msg as $msg) {
+                    //         if ($msg == "Could not be update the product") {
+                    //             echo "<div class='bg-danger text-center err-width rounded-2'><span class='error-msg'>$msg</span></div>";
+                    //         } else {
+                    //             echo "<div class='success-msg text-center err-width rounded-2'><span class='success-msg text-light'>$msg</span></div>";
+                    //         }
+                    //     }
+                    // }
 
                     $select = mysqli_query($con, "SELECT * FROM product WHERE id=$id");
                     while ($row = mysqli_fetch_assoc($select)) {
@@ -80,7 +122,7 @@ if (isset($_POST['update_product'])) {
                             $selectedCategory = $row['categories_id'];
                             $sql_select = mysqli_query($con, "SELECT category_name, category_id FROM category");
                             while ($catRow = mysqli_fetch_assoc($sql_select)) {
-                                
+
                                 $categoryId = $catRow['category_id'];
                                 $categoryName = $catRow['category_name'];
                                 $selected = ($selectedCategory ==  $categoryId) ? 'selected' : '';
