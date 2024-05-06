@@ -9,6 +9,14 @@
 <body>
     <center>
         <h1>product</h1>
+        <div><a href="{{ route('index') }}">create new product</a></div>
+        @if (session()->has('success'))
+            
+          <div>
+            {{ session('success') }}
+          </div>
+            
+        @endif
         <div>
             <table border="1">
                 <tr>
@@ -23,6 +31,14 @@
                   <td>{{ $data->price }}</td>
                   <td>
                     <a href="{{ route('edit',['product'=>$data]) }}">Edit</a>
+                  </td>
+                  <td>
+                    <form action="{{ route('delete',['product'=>$data]) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    {{-- //<a href="{{ route('delete',['id'=>$data]) }}">delete</a> --}}
+                    <input type="submit" value="delete">
+                  </form>
                   </td>
                 </tr>
               @endforeach

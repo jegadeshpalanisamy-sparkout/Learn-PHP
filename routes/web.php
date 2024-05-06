@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\demoSingleActionController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\products;
+use App\Http\Controllers\studentController;
 use App\Http\Controllers\test;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -128,3 +130,11 @@ Route::get('product',[productController::class,'show'])->name('welcome');
 Route::get('product/create',[productController::class,'index'])->name('index');
 Route::post('product',[productController::class,'store'])->name('store');
 Route::get('product/{product}/edit',[productController::class,'edit'])->name('edit');
+Route::put('product/{product}/update',[productController::class,'update'])->name('update');
+Route::delete('product/{product}/delete',[productController::class,'delete'])->name('delete');
+
+//single action controller
+Route::get('/',demoSingleActionController::class);
+
+//resource controller ,resource route
+Route::resource('student',studentController::class);
