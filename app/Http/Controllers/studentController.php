@@ -16,9 +16,8 @@ class studentController extends Controller
      */
     public function index()
     {
-        $student=Student::get();
-        return view('Students.index',compact('student'));
-
+        $student = Student::get();
+        return view('Students.index', compact('student'));
     }
 
     /**
@@ -28,8 +27,7 @@ class studentController extends Controller
      */
     public function create()
     {
-       return view('Students.create');
-
+        return view('Students.create');
     }
 
     /**
@@ -40,22 +38,23 @@ class studentController extends Controller
      */
     public function store(Request $request)
     {
-        //
-       $data= $request->validate([
-            'name'=>['required','string'],
-            'age'=>['required','numeric'],
-            'email'=>['required','email']
-            
-       ]);
-      
-       $studentObj=new Student();
-       $studentObj->name=$request->name;
-       $studentObj->age=$request->age;
-      
+        
+        try 
+        {
+            $data = $request->validate([
+                'name' => ['required', 'string'],
+                'age' => ['required', 'numeric'],
+                'email' => ['required', 'email']
 
-       $studentObj->save();
-       return redirect()->back()->with('success','student details added successfuly');
-      
+            ]);
+            //    dd($data);
+
+            $save = Student::create($data);
+            return redirect()->back()->with('success', 'student details added successfuly');
+        } catch(\Exception $e) 
+        {
+            return redirect(route('student.create'))->with('error', 'Error occured:' . $e->getMessage());
+        }
     }
 
     /**
@@ -64,9 +63,11 @@ class studentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Student $student)
     {
         //
+        return view('Students.show',compact('student'));
+
     }
 
     /**
@@ -75,9 +76,10 @@ class studentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Student $student)
     {
         //
+        return view('Students.edit', compact('student'));
     }
 
     /**
@@ -89,7 +91,20 @@ class studentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $data = $request->validate([
+                'name' => ['required', 'string'],
+                'age' => ['required', 'numeric'],
+                'email' => ['required', 'email']
+            ]);
+
+            $student = Student::findOrFail($id);
+
+            $student->update($data);
+            return redirect()->route('student.index')->with('success', 'Student details updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->route('student.edit', $id)->with('error', 'Error occurred: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -98,8 +113,10 @@ class studentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Student $student)
     {
-        //
+
+        $student->delete();
+        return redirect()->back()->with('success', 'student deatils was deleted');
     }
 }

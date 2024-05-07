@@ -5,49 +5,74 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\product;
 use Illuminate\Http\Request;
-use Symfony\Contracts\Service\Attribute\Required;
+
 
 class productController extends Controller
 {
-    //
+     //display the all product lists
     public function welcome()
     {
         return view('product.index');
     }
+    //create new product
     public function index()
     {
         return view('product.create');
     }
-
+    //Store a newly created resource in storage.
     public function store(Request $request)
     {
-        // dd($request);
-      //  $data = $request->only(['name', 'price']); 
-      $data=$request->validate([
-        'name'=>['Required','string'],
-        'price'=>['Required','numeric']
-      ]);
+        try{
+            $data=$request->validate([
+                'name'=>['Required','string'],
+                'price'=>['Required','numeric']
+              ]);
+        
+                $save = product::create($data);
+                if(isset($save))
+                {
+                    return redirect(route('welcome'))->with('message',"added successfully");
+                }
+                
+                else{
+                    return redirect(route('index'))->with('error',"Data not stored");
+                }
 
-        $save = product::create($data);
-        // return redirect(route('index'));
-        return redirect(route('welcome'))->with('success',"added successfully");
+
+        }
+        catch(\Exception $e)
+        {
+            return redirect(route('index'))->with('error',"An error occurred: ".$e->getMessage());
+        }
+    
+       
     }
     public function show()
     {
-        $Alldata=product::all();
-        return view('product.index',compact('Alldata'));
+        $getAllProducts=product::all();
+        return view('product.index',compact('getAllProducts'));
     }
-
+    //edit product 
     public function edit(product $product)
     {
         // dd($product);
         return view('product.edit',['product'=>$product]);
     }
-    public function update(product $product,Request $req)
+    public function update(product $product,Request $request)
     {
-        $data=$req->only(['name','price']);
-        $product->update($data);
-       return redirect(route('welcome'))->with('success','product update successfully');
+        try{
+            $data=$request->validate([
+                'name'=>['Required','string'],
+                'price'=>['Required','numeric']
+              ]);     
+        
+                $product->update($data);
+               return redirect(route('welcome'))->with('success','product update successfully');
+        }
+       catch(\Exception $e){
+            return redirect()->back()->withInput()->with('error','An error occured'.$e->getMessage());
+       }
+      
     }
     public function delete(product $product)
     {

@@ -8,6 +8,9 @@
 </head>
 <body>
     <center>
+        <div style="color: red">
+            {{ session('error') }}
+          </div>
         <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('post')

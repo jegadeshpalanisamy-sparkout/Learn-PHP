@@ -24,16 +24,16 @@
                     <th>name</th>
                     <th>price</th>
                 </tr>
-                @foreach ($Alldata as $data)
+                @foreach ($getAllProducts as $getAllProducts)
                 <tr>
-                  <td>{{ $data->id }}</td>
-                  <td>{{ $data->name }}</td>
-                  <td>{{ $data->price }}</td>
+                  <td>{{ $getAllProducts->id }}</td>
+                  <td>{{ $getAllProducts->name }}</td>
+                  <td>{{ $getAllProducts->price }}</td>
                   <td>
-                    <a href="{{ route('edit',['product'=>$data]) }}">Edit</a>
+                    <a href="{{ route('edit',['product'=>$getAllProducts]) }}">Edit</a>
                   </td>
                   <td>
-                    <form action="{{ route('delete',['product'=>$data]) }}" method="post">
+                    <form action="{{ route('delete',['product'=>$getAllProducts]) }}" method="post">
                     @csrf
                     @method('delete')
                     {{-- //<a href="{{ route('delete',['id'=>$data]) }}">delete</a> --}}

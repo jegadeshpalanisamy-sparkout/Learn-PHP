@@ -5,6 +5,7 @@ use App\Http\Controllers\productController;
 use App\Http\Controllers\products;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\test;
+use App\Models\Eloquent;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -138,3 +139,9 @@ Route::get('/',demoSingleActionController::class);
 
 //resource controller ,resource route
 Route::resource('student',studentController::class);
+
+
+//Learn Eloquent model
+Route ::get('/eloquent',function(){
+    return  Eloquent::get();
+});
