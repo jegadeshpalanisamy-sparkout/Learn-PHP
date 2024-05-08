@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\demoSingleActionController;
+use App\Http\Controllers\form_handling_validationController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\products;
 use App\Http\Controllers\studentController;
@@ -145,3 +146,8 @@ Route::resource('student',studentController::class);
 Route ::get('/eloquent',function(){
     return  Eloquent::get();
 });
+
+
+//form-validation
+ Route::get('formindex',[form_handling_validationController::class,'index']);
+ Route::post('store',[form_handling_validationController::class,'store'])->name('valitation.store');
