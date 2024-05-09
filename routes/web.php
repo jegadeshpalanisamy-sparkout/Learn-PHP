@@ -2,13 +2,24 @@
 
 use App\Http\Controllers\demoSingleActionController;
 use App\Http\Controllers\form_handling_validationController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\products;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\test;
+use App\Models\Comment;
+use App\Models\Company;
 use App\Models\Eloquent;
+use App\Models\Employe;
+use App\Models\Post;
+use App\Models\Worker;
+
+
+use App\Models\Phone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+
 use PHPUnit\TextUI\XmlConfiguration\Group;
 
 /*
@@ -151,3 +162,80 @@ Route ::get('/eloquent',function(){
 //form-validation
  Route::get('formindex',[form_handling_validationController::class,'index']);
  Route::post('store',[form_handling_validationController::class,'store'])->name('valitation.store');
+
+
+ //Model-Relationships
+ //one to one
+ Route :: get('/one-to-one',function(){
+//    $emp= Employe::find(1);
+    $emp=Employe::with('phone')->whereId(1)->first();
+    return Response::json($emp);
+//    dd($emp->phone);
+ });
+
+
+ //inverse one to one
+ Route::get('/inverse-one-to-one',function(){
+    // $phone=Phone::find(1);
+    $phone=Phone::with('employe')->whereId(1)->first();
+    return Response::json($phone);
+    // dd($phone);
+
+ });
+
+ //update data---- one-to-one
+ Route::get('/one-to-one-update',function(){
+    $emp=Employe::find(2);
+    $phone=new Phone();
+     $phone->phone='823787890';
+    // $emp->phone()->save($phone); ---its does not update--it added new datas
+    // return 'saved';
+    $emp->phone()->update($phone->toArray());//it must be typed array
+    return "updated";
+ });
+
+ //change foreignkey to employee----one-to-one
+ Route::get('/change-fk',function(){
+    $emp=Employe::find(2);
+    $phone=Phone::find(2);
+
+    $phone->employe()->associate($emp)->save();
+    return 'successfully updated forign key';
+ });
+
+
+
+ Route::get('/company',function(){
+    $workers=Company::with('getWorkers')->whereId(1)->get();
+    return Response::json($workers);
+ });
+
+
+ Route::get('/worker',function(){
+    $company=Worker::with('getCompany')->whereId(3)->first();
+    return Response::json($company);
+
+ });
+
+
+ //one-to-mamy
+ Route::get('/one-to-many',function(){
+    $post=Post::with('getComment')->whereId(1)->first();
+    // dd($post);
+    return Response::json($post);
+ });
+
+ Route::get('/comments',function(){
+    $cmd=Comment::with('getPost')->whereId(5)->get();
+    return Response::json($cmd);
+ });
+
+//insert value ---one to many
+Route::get('/insert-one-to-many',function(){
+  $post=Post::find(1);
+  $command=new Comment();
+  $command->name='fourth commant';
+  $post->getComment()->save($command);
+  return 'success';
+
+});

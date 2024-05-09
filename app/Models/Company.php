@@ -4,13 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Employe extends Model
+class Company extends Model
 {
     use HasFactory;
-    public function phone()
+
+    public function getWorkers()
     {
-        return $this->hasOne(Phone::class);
+        return $this->hasOne(Worker::class);
     }
 }
