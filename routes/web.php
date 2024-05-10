@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\demoSingleActionController;
+use App\Http\Controllers\EmployeePhoneController;
 use App\Http\Controllers\form_handling_validationController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\productController;
@@ -11,11 +12,15 @@ use App\Models\Comment;
 use App\Models\Company;
 use App\Models\Eloquent;
 use App\Models\Employe;
+use App\Models\Mobile;
+use App\Models\Player;
 use App\Models\Post;
+use App\Models\Team;
 use App\Models\Worker;
 
 
 use App\Models\Phone;
+use App\Models\Type;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
@@ -172,7 +177,7 @@ Route ::get('/eloquent',function(){
     return Response::json($emp);
 //    dd($emp->phone);
  });
-
+ Route::get('employe/{id}',[EmployeePhoneController::class,'show']);
 
  //inverse one to one
  Route::get('/inverse-one-to-one',function(){
@@ -237,5 +242,32 @@ Route::get('/insert-one-to-many',function(){
   $command->name='fourth commant';
   $post->getComment()->save($command);
   return 'success';
+
+});
+
+
+//many to many
+Route::get('many-to-many',function(){
+     $Teams=Team::with('getPlayer')->whereId(2)->get();
+     return Response::json($Teams);
+});
+
+
+Route::get('/many-to-manys',function(){
+    $player=Player::with('getTeam')->whereId(1)->get();
+    return Response::json($player);
+});
+
+
+//has many through
+Route::get('/has-many-through',function(){
+//      $MO=Mobile::with('getNetwork')->whereId(3)->get();
+//     $mob=Mobile::find(3);
+//    $mobile=$mob->getNetwork;
+//     dd($mobile);
+//     dd($MO->network);
+$mob = Mobile::with('getNetwork')->find(3);
+ $mobile = $mob->getNetwork;
+dd($mobile);
 
 });
