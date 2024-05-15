@@ -3,6 +3,8 @@
 use App\Http\Controllers\demoSingleActionController;
 use App\Http\Controllers\EmployeePhoneController;
 use App\Http\Controllers\form_handling_validationController;
+use App\Http\Controllers\Member;
+use App\Http\Controllers\memberController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\products;
@@ -17,11 +19,15 @@ use App\Models\Player;
 use App\Models\Post;
 use App\Models\Team;
 use App\Models\Worker;
+use Illuminate\Support\Str;
+
 
 
 use App\Models\Phone;
 use App\Models\Type;
+use Carbon\PHPStan\Macro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
 
@@ -271,3 +277,68 @@ $mob = Mobile::with('getNetwork')->find(3);
 dd($mobile);
 
 });
+
+//create sample data with collection
+
+Route::get('/learn-collection',function(){
+    $data=[
+        ['name'=>'jega','age'=>21],
+        ['name'=>'arun','age'=>22],
+        ['name'=>'john','age'=>15]
+    ];
+
+   // $collection=new Collection($data);
+   $collection=collect($data);
+    //  dd($collection);
+    // return $collection;
+
+    // using where to filter the collection data
+    $filter=$collection->where('age','>=',21);
+
+    $mapped=$collection->map(function($item){
+        return $item['name']."and".$item['age'];
+    });
+
+    dd($mapped);
+    // return $filter;
+    
+});
+
+
+//using map in collection
+Route::get('/map-collection',function(){
+    $collection=collect(['CRICKET','FOOTBALL',null])->map(function($sport){
+        return strtolower($sport);
+    })->reject(function($name){
+        return empty($name);
+    });
+    dd($collection);
+});
+
+//extending collection
+Route::get('/extending-method',function(){
+    // Collection::Macro('toUpper',function()
+    // {
+    //     return $this->map(function($value){
+    //         return Str::upper($value);
+    //     });
+    // });
+    // $collection=collect(['first','second']);
+    // $upper=$collection->toUpper();
+    // return $upper;
+
+    Collection::macro('sum',function(){
+        return $this->map(function($args){
+            $sum=0;
+           $sum=$sum+$args;
+        });
+    });
+    $collection=collect([1,2,3]);
+    $sum=$collection->sum();
+
+    return $sum;
+
+
+});
+Route::get('/accessors',[memberController::class,'index']);
+Route::get('/mutator',[memberController::class,'create']);
