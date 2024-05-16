@@ -8,6 +8,7 @@ use App\Http\Controllers\memberController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\products;
+use App\Http\Controllers\RawQueryController;
 use App\Http\Controllers\studentController;
 use App\Http\Controllers\test;
 use App\Models\Comment;
@@ -342,3 +343,54 @@ Route::get('/extending-method',function(){
 });
 Route::get('/accessors',[memberController::class,'index']);
 Route::get('/mutator',[memberController::class,'create']);
+Route::get('/load-learn',[memberController::class,'show']);
+
+//Raw Query 
+Route::prefix('/raw-queries')->group(function(){
+    Route::get('/index',[RawQueryController::class,'index']);
+    Route::get('/create',[RawQueryController::class,'create']);
+    Route::get('update',[RawQueryController::class,'update']);
+    route::get('delete',[RawQueryController::class,'delete']);
+}   
+);
+
+
+
+
+//collection methods
+Route::get('collection-methods',function(){
+    $data=[5,7,9,8,4,6,7,4,2,1,3];
+    $data2=[10,20,30];
+    $collection=collect($data);
+    // dd($collection->all());
+    // dd($collection->avg());
+
+
+
+    // $multidimensionalData=[
+    //     ['apple','red'],
+    //     [1,2,3]
+    // ];
+
+    $multidimensionalData=[
+        ['name'=>'apple','rate'=>200],
+        ['name'=>'mango','rate'=>400]
+    ];
+    $multiDatas=collect($multidimensionalData);
+    // dd($multiDatas->collapse());
+
+    // dd($collection->chunk(3));
+    $data3=$collection->concat($data2);
+    // dd($data3);
+
+    $key=collect(['name','age']);
+    $combined=$key->combine(['jega',22]);
+    // dd($combined);
+
+    // dd($collection->contains(1));
+
+    dd($collection);
+
+
+});
+

@@ -27,4 +27,13 @@ class memberController extends Controller
         }
         
     }
+
+    public function show()
+    {
+        $member=Member::find(1);
+        // dd($member);
+        return $member->load('Roles');
+        
+    }
+
 }

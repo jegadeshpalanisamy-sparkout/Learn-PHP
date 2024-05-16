@@ -27,6 +27,8 @@ class Member extends Model
         $this->attributes['city']=ucfirst($value)."-TN";
     }
 
-    
+    public function Roles(){
+        return $this->hasMany(Role::class);
+    }
     
 }
