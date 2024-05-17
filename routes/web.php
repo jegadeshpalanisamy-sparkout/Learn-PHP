@@ -390,7 +390,5 @@ Route::get('collection-methods',function(){
     // dd($collection->contains(1));
 
     dd($collection);
-
-
 });
 
