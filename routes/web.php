@@ -3,6 +3,7 @@
 use App\Http\Controllers\demoSingleActionController;
 use App\Http\Controllers\EmployeePhoneController;
 use App\Http\Controllers\form_handling_validationController;
+use App\Http\Controllers\LearnMiddlewareController;
 use App\Http\Controllers\Member;
 use App\Http\Controllers\memberController;
 use App\Http\Controllers\PersonController;
@@ -21,7 +22,7 @@ use App\Models\Post;
 use App\Models\Team;
 use App\Models\Worker;
 use Illuminate\Support\Str;
-
+use App\Http\Middleware\CheckNumberIndays;
 
 
 use App\Models\Phone;
@@ -391,4 +392,34 @@ Route::get('collection-methods',function(){
 
     dd($collection);
 });
+
+//middleware
+// Route::get('/days/{num}',[LearnMiddlewareController::class,'index'])->middleware("day");
+Route::get('/days/{num}',function($num){
+    if($num==1)
+    {
+        return "sunday";
+    }
+    else if($num==2){
+        return "monday";
+    }
+    
+    
+})->middleware('day');   //or middleware(CheckNumberIndays::class);
+
+//grouped middleware
+
+Route::view('middleware-noaccess','learn-middleware.no_access');
+
+// Route::group(['middleware'=>['protectedPage']],function(){    
+//     Route::view('middleware-home/{age}','learn-middleware.home');
+//     Route::view('middleware-about/{age}','learn-middleware.about');
+// });
+
+Route::middleware(['protectedPage'])->group(function(){    
+    Route::view('middleware-home/{age}','learn-middleware.home');
+    Route::view('middleware-about/{age}','learn-middleware.about');
+});
+
+
 
