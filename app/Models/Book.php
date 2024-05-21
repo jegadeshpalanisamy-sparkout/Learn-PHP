@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+    public $timestamp=false;
+
+    protected $fillable=['author','mail','count'];
 }
