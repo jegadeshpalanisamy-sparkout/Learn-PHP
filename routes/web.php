@@ -6,6 +6,7 @@ use App\Http\Controllers\form_handling_validationController;
 use App\Http\Controllers\LearnMiddlewareController;
 use App\Http\Controllers\Member;
 use App\Http\Controllers\memberController;
+use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\products;
@@ -416,10 +417,15 @@ Route::view('middleware-noaccess','learn-middleware.no_access');
 //     Route::view('middleware-about/{age}','learn-middleware.about');
 // });
 
-Route::middleware(['protectedPage'])->group(function(){    
+Route::middleware(['protectedPage'])->group(function()
+{    
     Route::view('middleware-home/{age}','learn-middleware.home');
     Route::view('middleware-about/{age}','learn-middleware.about');
 });
 
+
+//pagination
+
+Route::get('/pagination',[PaginationController::class,'show']);
 
 
