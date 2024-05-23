@@ -33,3 +33,4 @@ Route::get('/search/{name}',[ApiLearnController::class,'search']);
 //API resource
 Route::get('/member/{id}',[ApiResourceController::class,'getMember']);
 Route::get('/members',[ApiResourceController::class,'getMembers']);
+

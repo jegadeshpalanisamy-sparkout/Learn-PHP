@@ -5,6 +5,8 @@ use App\Http\Controllers\EmployeePhoneController;
 use App\Http\Controllers\form_handling_validationController;
 use App\Http\Controllers\LearnMiddlewareController;
 use App\Http\Controllers\Member;
+use App\Http\Controllers\DemoController;
+use App\Http\Controllers\FileController;
 use App\Http\Controllers\memberController;
 use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\PersonController;
@@ -428,4 +430,16 @@ Route::middleware(['protectedPage'])->group(function()
 
 Route::get('/pagination',[PaginationController::class,'show']);
 
+Route::view('/learn-js-prototype','prototype');
 
+//file upload
+// Route::get('/file',[FileController::class,'index']);
+// Route::post('/upload',[FileController::class,'upload']);
+
+
+Route::prefix('/file')->group(function(){
+    Route::get('/',[FileController::class,'index'])->name('index');
+    Route::post('/store',[FileController::class,'store'])->name('store');
+    Route::get('/show',[FileController::class,'show'])->name('show');
+
+});

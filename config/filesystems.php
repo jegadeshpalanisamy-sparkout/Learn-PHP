@@ -1,5 +1,7 @@
 <?php
 
+use SebastianBergmann\CodeCoverage\Driver\Driver;
+
 return [
 
     /*
@@ -13,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'profile_picture'),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,6 +35,7 @@ return [
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
+            // 'root'=>storage_path('custom-folder')
         ],
 
         'public' => [
@@ -52,6 +55,14 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
+
+        'profile_picture'=>[
+            'driver'=>'local',
+            'root'=>storage_path('app/profile_pictures'),
+            'url' => env('APP_URL').'/storage/app/',
+            'visibility' => 'public',
+            
+        ]
 
     ],
 
