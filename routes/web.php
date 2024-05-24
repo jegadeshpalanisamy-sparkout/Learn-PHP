@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CookieController;
 use App\Http\Controllers\demoSingleActionController;
 use App\Http\Controllers\EmployeePhoneController;
 use App\Http\Controllers\form_handling_validationController;
@@ -7,10 +8,12 @@ use App\Http\Controllers\LearnMiddlewareController;
 use App\Http\Controllers\Member;
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\memberController;
 use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\productController;
+use App\Http\Controllers\ProductCustomRequestController;
 use App\Http\Controllers\products;
 use App\Http\Controllers\RawQueryController;
 use App\Http\Controllers\studentController;
@@ -443,3 +446,72 @@ Route::prefix('/file')->group(function(){
     Route::get('/show',[FileController::class,'show'])->name('show');
 
 });
+
+
+//session
+
+Route::get('/store-session-data',function(Request $request){
+    $request->session()->put(['name'=>'jegadesh','age'=>21]);
+    $request->session()->put('email','jega@gmail.com');//this is one way
+    //this is another way to store a session value
+    session([
+        'name'=>'jega',//it will be overrided to previous name
+        'from'=>'tirupur',
+        'mobile'=>8765432190
+    ]);
+
+//   $request->session()->flash('status','success fully added data'); //this flash data will available current request
+     return "data will be saved successfully";
+
+   
+    
+});
+
+Route::get('/get-session-data',function(Request $request){
+    // difference type of ways to get session data
+    // dd(session()->all());
+   echo session() ->get('name'). '<br>';
+   echo session('from'). '<br>';
+
+    //when if retrived wrong value
+    if(session()->has('mobile'))
+    {
+        echo session('mobile');
+    }
+    else{
+        echo "the value cannot have in this session";
+    }
+
+    echo "<br>";
+     echo $request->session()->get('number','default value');//number var cannot have in this session so can i set default value
+    dd( $request->session()->get('number',function(){
+        return "hello i am default value";
+    }));
+
+});
+
+Route::get('/delete-session-data',function(Request $request){
+    // $request->session()->forget('mobile');//it delete particular datas
+    // $request->session()->forget(['name','age']);
+    $request->session()->flush();//it delete all datas
+
+    return 'data was deleted';
+});
+
+
+Route::view('/session-login','login-session.login');
+Route::post('/store',[LoginController::class,'store']);
+Route::view('/profile','login-session.profile');
+Route::get('/logout-session',[LoginController::class,'logout']);
+
+
+
+//Cookies
+Route::prefix("/cookie")->group(function(){
+    Route::get('/set',[CookieController::class,'createCookie']);
+    Route::get('/get',[CookieController::class,'getCookie']);
+});
+
+//custom request to validate
+Route::get('/custom-req-index',[ProductCustomRequestController::class,'index']);
+Route::post('/custom-req-store',[ProductCustomRequestController::class,'store']);
