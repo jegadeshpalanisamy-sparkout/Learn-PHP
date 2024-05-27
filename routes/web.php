@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\demoSingleActionController;
 use App\Http\Controllers\EmployeePhoneController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\DemoController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\memberController;
+use App\Http\Controllers\MultiFormValidationController;
 use App\Http\Controllers\PaginationController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\productController;
@@ -30,10 +32,11 @@ use App\Models\Worker;
 use Illuminate\Support\Str;
 use App\Http\Middleware\CheckNumberIndays;
 
-
+use App\Http\Controllers\Auth\LoginController as AuthLogin;
 use App\Models\Phone;
 use App\Models\Type;
 use Carbon\PHPStan\Macro;
+use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
@@ -515,3 +518,21 @@ Route::prefix("/cookie")->group(function(){
 //custom request to validate
 Route::get('/custom-req-index',[ProductCustomRequestController::class,'index']);
 Route::post('/custom-req-store',[ProductCustomRequestController::class,'store']);
+
+
+//multi form validation
+Route::prefix('multi-form-validation')->group(function(){
+    Route::get('/',[MultiFormValidationController::class,'index']);
+    Route::post('/store',[MultiFormValidationController::class,'store']);
+});
+
+
+//manual authentication
+        //registration
+Route::view('/auth','auth.login')->middleware('guest')->name('login');
+Route::get('/auth-create',[RegisterController::class,'create'])->middleware('guest');
+Route::post('/auth-store',[RegisterController::class,'store']);
+Route::view('/home','auth.home')->middleware('auth');      
+        //login
+Route::post('/auth-login',[AuthLogin::class,'loginAuthentication']);
+Route::get('/auth-logout',[AuthLogin::class,'logout']);
