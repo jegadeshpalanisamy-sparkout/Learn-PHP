@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ApiLearnController;
 use App\Http\Controllers\ApiResourceController;
+use App\Http\Controllers\OrderPlaceController;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,3 +36,5 @@ Route::get('/search/{name}',[ApiLearnController::class,'search']);
 Route::get('/member/{id}',[ApiResourceController::class,'getMember']);
 Route::get('/members',[ApiResourceController::class,'getMembers']);
 
+//model events
+Route::post('/event',[OrderPlaceController::class,'placeOrder']);

@@ -35,8 +35,7 @@ class StoreProductRequest extends FormRequest
         return[
             
                 'name.required'=>'Product name should be must one',
-                'name.min'=>'Atleast minium 3 character required'
-            
+                'name.min'=>'Atleast minium 3 character required'            
            
         ];
     }

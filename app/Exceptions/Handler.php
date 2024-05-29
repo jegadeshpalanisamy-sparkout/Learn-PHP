@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Exceptions;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
@@ -37,5 +38,29 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function report(Throwable $e)
+    {
+        //  dd('repored');
+       
+        if ($e instanceof FileNotFoundException) {
+            echo 'File not found';
+        }
+    //    dd($e);
+    }
+
+    public function render($request, Throwable $e)
+    {
+        // if ($e instanceof FileNotFoundException) {
+        //     dd('File not found from render');
+        // }
+
+        if($e instanceof CustomException)
+        {
+            // dd($e);
+            return $e->render($request);
+        }
+        
     }
 }

@@ -33,6 +33,8 @@ use Illuminate\Support\Str;
 use App\Http\Middleware\CheckNumberIndays;
 
 use App\Http\Controllers\Auth\LoginController as AuthLogin;
+use App\Http\Controllers\MemberControllerForExceptionHandling;
+use App\Http\Controllers\OrderPlaceController;
 use App\Models\Phone;
 use App\Models\Type;
 use Carbon\PHPStan\Macro;
@@ -536,3 +538,13 @@ Route::view('/home','auth.home')->middleware('auth');
         //login
 Route::post('/auth-login',[AuthLogin::class,'loginAuthentication']);
 Route::get('/auth-logout',[AuthLogin::class,'logout']);
+
+
+//js DOM
+Route::view('/js-dom','JS-DOM.dom');
+
+
+//Exception Handling
+Route::get('/exception',[MemberControllerForExceptionHandling::class,'index']);
+Route::get('/exception-search',[MemberControllerForExceptionHandling::class,'show'])->name('member.search');
+
