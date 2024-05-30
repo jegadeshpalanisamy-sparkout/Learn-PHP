@@ -33,8 +33,10 @@ use Illuminate\Support\Str;
 use App\Http\Middleware\CheckNumberIndays;
 
 use App\Http\Controllers\Auth\LoginController as AuthLogin;
+use App\Http\Controllers\MarkDownMailContoller;
 use App\Http\Controllers\MemberControllerForExceptionHandling;
 use App\Http\Controllers\OrderPlaceController;
+use App\Http\Controllers\TestMailController;
 use App\Models\Phone;
 use App\Models\Type;
 use Carbon\PHPStan\Macro;
@@ -548,3 +550,9 @@ Route::view('/js-dom','JS-DOM.dom');
 Route::get('/exception',[MemberControllerForExceptionHandling::class,'index']);
 Route::get('/exception-search',[MemberControllerForExceptionHandling::class,'show'])->name('member.search');
 
+//mail
+
+Route::get('/mail',[TestMailController::class,'index']);
+
+//markdown mail
+Route::get('/markdown-mail',[MarkDownMailContoller::class,'index']);

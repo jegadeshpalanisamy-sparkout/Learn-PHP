@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Models\Student;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,6 +18,14 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+
+        // $schedule->command('daily:message')->everyMinute()->appendOutputTo('scheduler.log');
+        $schedule->call(function(){
+            Log::info('Started');
+            $output=Student::where('age','>',29)->delete();
+            Log::info($output."=>student was deleted");
+
+        })->everyMinute();
     }
 
     /**
@@ -29,4 +39,6 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
+    
 }
