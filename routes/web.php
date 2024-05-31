@@ -37,6 +37,7 @@ use App\Http\Controllers\MarkDownMailContoller;
 use App\Http\Controllers\MemberControllerForExceptionHandling;
 use App\Http\Controllers\OrderPlaceController;
 use App\Http\Controllers\TestMailController;
+use App\Http\Controllers\UserQueueController;
 use App\Models\Phone;
 use App\Models\Type;
 use Carbon\PHPStan\Macro;
@@ -556,3 +557,11 @@ Route::get('/mail',[TestMailController::class,'index']);
 
 //markdown mail
 Route::get('/markdown-mail',[MarkDownMailContoller::class,'index']);
+
+//Queue
+Route::get('/queue',[UserQueueController::class,'index']);
+Route::post('/queue-send',[UserQueueController::class,'sendMail']);
+
+//component
+Route::view('/component-about','learn-component.about');
+Route::view('/component-home','learn-component.home');
