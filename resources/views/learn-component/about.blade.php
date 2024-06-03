@@ -7,7 +7,9 @@
     <title>about</title>
 </head>
 <body>
-    <x-header title="about"></x-header>
+    <x-header title="about">
+        <p>helo i am from slot</p>
+    </x-header>
     <h5>This is about page</h5>
     <x-sub.button/>
     <x-link/>

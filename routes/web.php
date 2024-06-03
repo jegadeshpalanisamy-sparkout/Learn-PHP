@@ -33,6 +33,7 @@ use Illuminate\Support\Str;
 use App\Http\Middleware\CheckNumberIndays;
 
 use App\Http\Controllers\Auth\LoginController as AuthLogin;
+use App\Http\Controllers\DemoServiceProviderController;
 use App\Http\Controllers\MarkDownMailContoller;
 use App\Http\Controllers\MemberControllerForExceptionHandling;
 use App\Http\Controllers\OrderPlaceController;
@@ -565,3 +566,7 @@ Route::post('/queue-send',[UserQueueController::class,'sendMail']);
 //component
 Route::view('/component-about','learn-component.about');
 Route::view('/component-home','learn-component.home');
+
+
+//service Provider
+Route::get('/service-provider-day/{param}',[DemoServiceProviderController::class,'getDay']);

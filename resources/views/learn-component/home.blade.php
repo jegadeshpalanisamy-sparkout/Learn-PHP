@@ -7,11 +7,15 @@
     <title>home</title>
 </head>
 <body>
-    <x-header title="home"></x-header>
+    <x-header title="home" style="color: blueviolet">
+       
+    </x-header>
 
     <h5>This is home page</h5>
-
+    <p>helo i am from slot</p>
+    
     <x-sub.button/>
     <x-link/>
+    
 </body>
 </html>
