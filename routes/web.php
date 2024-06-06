@@ -1,5 +1,6 @@
 <?php
 
+use App\Facades\MyFacade;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\CookieController;
 use App\Http\Controllers\demoSingleActionController;
@@ -61,9 +62,9 @@ use PHPUnit\TextUI\XmlConfiguration\Group;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // Route::get('/home', function (){
 //     return "<h1>Welcome</h1>";
@@ -175,7 +176,7 @@ Route::put('product/{product}/update',[productController::class,'update'])->name
 Route::delete('product/{product}/delete',[productController::class,'delete'])->name('delete');
 
 //single action controller
-Route::get('/',demoSingleActionController::class);
+// Route::get('/',demoSingleActionController::class);
 
 //resource controller ,resource route
 Route::resource('student',studentController::class);
@@ -570,3 +571,9 @@ Route::view('/component-home','learn-component.home');
 
 //service Provider
 Route::get('/service-provider-day/{param}',[DemoServiceProviderController::class,'getDay']);
+
+//Facade
+Route::get('/facade',function(){
+   
+    dd( MyFacade::welcome());
+});

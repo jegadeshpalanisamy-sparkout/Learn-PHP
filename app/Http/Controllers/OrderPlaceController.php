@@ -21,7 +21,7 @@ class OrderPlaceController extends Controller
         
 
         // event(new OrderPlaced($order));//method 1
-        OrderPlaced::dispatch($order);//method 2
+    OrderPlaced::dispatch($order);//method 2
                                             //method 3 in model
     }
 }

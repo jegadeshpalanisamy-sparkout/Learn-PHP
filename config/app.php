@@ -1,5 +1,6 @@
 <?php
 
+use App\Facade\MyFacade;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -177,7 +178,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\DayServiceProvider::class,
-
+        App\Providers\MyFacadeServiceProvider::class,
+        
+        
     ],
 
     /*
@@ -193,6 +196,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // ...
+        'myfacade'=> App\Facades\MyFacade::class,
     ])->toArray(),
 
 ];
