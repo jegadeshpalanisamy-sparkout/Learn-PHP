@@ -39,9 +39,11 @@ use App\Http\Controllers\MarkDownMailContoller;
 use App\Http\Controllers\MemberControllerForExceptionHandling;
 use App\Http\Controllers\OrderPlaceController;
 use App\Http\Controllers\TestMailController;
+use App\Http\Controllers\TestNotificationController;
 use App\Http\Controllers\UserQueueController;
 use App\Models\Phone;
 use App\Models\Type;
+use App\Notifications\TestNotification;
 use Carbon\PHPStan\Macro;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Http\Request;
@@ -577,3 +579,9 @@ Route::get('/facade',function(){
    
     dd( MyFacade::welcome());
 });
+
+//new some function js
+Route::view('/new-js-functions','JS-DOM.jsfunctions');
+
+//Notification
+Route::get('/send-mail-notification',[TestNotificationController::class,'sendNotification']);
