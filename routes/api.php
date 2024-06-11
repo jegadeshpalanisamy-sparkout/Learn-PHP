@@ -4,7 +4,7 @@ use App\Http\Controllers\ApiLearnController;
 use App\Http\Controllers\ApiResourceController;
 use App\Http\Controllers\OrderPlaceController;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\CacheController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,3 +38,8 @@ Route::get('/members',[ApiResourceController::class,'getMembers']);
 
 //model events
 Route::post('/event',[OrderPlaceController::class,'placeOrder']);
+
+
+//checking cache speed
+Route::get('/with-cache',[CacheController::class,'withCacheing']);
+Route::get('/without-cache',[CacheController::class,'allWithoutCache']);

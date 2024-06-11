@@ -34,6 +34,7 @@ use Illuminate\Support\Str;
 use App\Http\Middleware\CheckNumberIndays;
 
 use App\Http\Controllers\Auth\LoginController as AuthLogin;
+use App\Http\Controllers\CacheController;
 use App\Http\Controllers\DemoServiceProviderController;
 use App\Http\Controllers\MarkDownMailContoller;
 use App\Http\Controllers\MemberControllerForExceptionHandling;
@@ -585,3 +586,10 @@ Route::view('/new-js-functions','JS-DOM.jsfunctions');
 
 //Notification
 Route::get('/send-mail-notification',[TestNotificationController::class,'sendNotification']);
+
+//cache
+Route::get('/cache',[CacheController::class,'setCache']);
+
+//checking cache speed
+Route::get('/with-cache',[CacheController::class,'withCacheing']);
+Route::get('/without-cache',[CacheController::class,'allWithoutCache']);
