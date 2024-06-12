@@ -589,7 +589,3 @@ Route::get('/send-mail-notification',[TestNotificationController::class,'sendNot
 
 //cache
 Route::get('/cache',[CacheController::class,'setCache']);
-
-//checking cache speed
-Route::get('/with-cache',[CacheController::class,'withCacheing']);
-Route::get('/without-cache',[CacheController::class,'allWithoutCache']);

@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
         // $this->call(demoSeeder::class);
         //  $this->call(MembersSeeder::class);
         // $this->call(AddtionalMembersSeeder::class);
-        $this->call(ArticleSeeder::class);
+        // $this->call(ArticleSeeder::class);
+        $this->call(UserTestSeeder::class);
     }
 
 }
