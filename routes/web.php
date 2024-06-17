@@ -38,10 +38,13 @@ use App\Http\Controllers\CacheController;
 use App\Http\Controllers\DemoServiceProviderController;
 use App\Http\Controllers\MarkDownMailContoller;
 use App\Http\Controllers\MemberControllerForExceptionHandling;
+use App\Http\Controllers\MultiPersonController;
 use App\Http\Controllers\OrderPlaceController;
 use App\Http\Controllers\TestMailController;
 use App\Http\Controllers\TestNotificationController;
+use App\Http\Controllers\TreeController;
 use App\Http\Controllers\UserQueueController;
+use App\Models\MultiplePerson;
 use App\Models\Phone;
 use App\Models\Type;
 use App\Notifications\TestNotification;
@@ -585,7 +588,32 @@ Route::get('/facade',function(){
 Route::view('/new-js-functions','JS-DOM.jsfunctions');
 
 //Notification
-Route::get('/send-mail-notification',[TestNotificationController::class,'sendNotification']);
+Route::get('/send-mail-notification',[TestNotificationController::class,'sendNotification   ']);
 
 //cache
 Route::get('/cache',[CacheController::class,'setCache']);
+
+
+//Rate limitation
+
+Route::get('rate-limit-only-two-times',function()
+{
+    return view('rate-limitation.index');
+})->middleware('throttle:only-two-times');
+
+
+Route::middleware('throttle:group-rate-limited')->group(function(){
+    Route::get('/home',function(){
+        return "Home page is there";
+    });
+    Route::get('/about',function(){
+        return "About page is there";
+    });
+});
+
+Route::get('/multi-person',[MultiPersonController::class,'index']);
+Route::get('/get-parent/{parent}',[MultiPersonController::class,'getParent'])->name('parent');
+
+
+Route::get('/tree', [TreeController::class, 'index']);
+Route::get('/children/{id}', [TreeController::class, 'getChildren']);
