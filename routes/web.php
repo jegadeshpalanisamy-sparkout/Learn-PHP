@@ -34,6 +34,7 @@ use Illuminate\Support\Str;
 use App\Http\Middleware\CheckNumberIndays;
 
 use App\Http\Controllers\Auth\LoginController as AuthLogin;
+use App\Http\Controllers\BinaryTreeController;
 use App\Http\Controllers\CacheController;
 use App\Http\Controllers\DemoServiceProviderController;
 use App\Http\Controllers\MarkDownMailContoller;
@@ -617,3 +618,8 @@ Route::get('/get-parent/{parent}',[MultiPersonController::class,'getParent'])->n
 
 Route::get('/tree', [TreeController::class, 'index']);
 Route::get('/children/{id}', [TreeController::class, 'getChildren']);
+
+
+
+//binary tree
+Route::view('/binary-tree','binary.binary_tree');

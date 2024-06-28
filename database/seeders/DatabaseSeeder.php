@@ -20,7 +20,10 @@ class DatabaseSeeder extends Seeder
         // $this->call(AddtionalMembersSeeder::class);
         // $this->call(ArticleSeeder::class);
         // $this->call(UserTestSeeder::class);
-        $this->call(TreeSeeder::class);
+        // $this->call(TreeSeeder::class);
+        $this->call(NodeSeeder::class);
+
     }
+
 
 }
