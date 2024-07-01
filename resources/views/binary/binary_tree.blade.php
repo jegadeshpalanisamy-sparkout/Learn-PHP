@@ -1,56 +1,140 @@
-<script>
-    // class Node {
-    //     constructor(value) {
-    //         this.value = value;
-    //         this.left = null;
-    //         this.right = null;
-    //     }
-    // }
+<!DOCTYPE html>
+<html lang="en">
 
-    // class BinarySearchTree {
-    //     constructor() {
-    //         this.root = null;
-    //     }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Tree Visualization</title>
+    <style>
+        .tree {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
 
-    //     insert(value) {
-    //         const newNode = new Node(value);
-    //         if (this.root === null) {
-    //             this.root = newNode;
-    //         } else {
-    //             this.insertNode(this.root, newNode);
-    //         }
-    //     }
+        .node {
+            border: 1px solid #000;
+            border-radius: 15px;
+            padding: 10px;
+            margin: 10px;
+            display: inline-block;            
+        }
 
-    //     insertNode(node, newNode) {
-    //         console.log(newNode.value,node.value);
-    //         console.log();
-    //         if (newNode.value < node.value) {
-    //             if (node.left === null) {
-    //                 node.left = newNode;
-    //             } else {
-    //                 this.insertNode(node.left, newNode);
-    //             }
-    //         } else {
-    //             if (node.right === null) {
+        .connector {
+            height: 20px;
+            width: 2px;
+            background: #d41818;
+            margin: 0 auto;
+        }
 
-    //                 node.right = newNode;
-    //             } else {
-    //                 this.insertNode(node.right, newNode);
-    //             }
-    //         }
-    //     } 
-    // }
+        .level {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            gap:2px;
+            
+        }
+        /* div{
+            padding-left:5px ;
+        } */
+    </style>
+</head>
 
-    // const bst = new BinarySearchTree();
-    // bst.insert('a');
-    // bst.insert('b');
-    // bst.insert('c');
-    // // bst.insert('d');
-    // // bst.insert('e');
-    // // bst.insert('f');
-    // // bst.insert('g');
-    // // bst.insert('h');
+<body>
+    <div id="tree" class="tree"></div>
 
-    // console.log(bst); // Output the binary search tree structure with nodes a, b, c, d, e, f, g, h
+    <script>
+        const treeData = {
+            "value": "a",
+            "left": {
+                "value": "b",
+                "left": {
+                    "value": "d",
+                    "left": {
+                        "value": "h"
+                    },
+                    "right": null
+                },
+                "right": {
+                    "value": "e"
+                }
+            },
+            "right": {
+                "value": "c",
+                "left": {
+                    "value": "f"
+                },
+                "right": {
+                    "value": "g"
+                }
+            }
+        };
 
-   </script>
+        function createNode(value, point) {
+            const node = document.createElement('div');
+            node.className = 'node';
+            node.innerText = `${value}: ${point}`;
+            return node;
+        }
+
+        function createConnector() {
+            const connector = document.createElement('div');
+            connector.className = 'connector';
+            return connector;
+        }
+
+        function createLevel() {
+            const level = document.createElement('div');
+            level.className = 'level';
+            return level;
+        }
+
+        function buildTree(node, treeElement) {
+            if (!node) return { point: 0 };
+
+            let point = 1000;
+            const currentNode = createNode(node.value, point);
+            treeElement.appendChild(currentNode);
+
+            if (node.left || node.right) {
+                const connector = createConnector();
+                treeElement.appendChild(connector);
+
+                const level = createLevel();
+                treeElement.appendChild(level);
+
+                if (node.left) {
+                    const leftTreeElement = document.createElement('div');
+                    const leftChild = buildTree(node.left, leftTreeElement);
+                    level.appendChild(leftTreeElement);
+                    point += leftChild.point * 0.1;
+                }
+
+                if (node.right) {
+                    const rightTreeElement = document.createElement('div');
+                    const rightChild = buildTree(node.right, rightTreeElement);
+                    level.appendChild(rightTreeElement);
+                    point += rightChild.point * 0.1;
+                }
+                
+                // Update the current node's displayed value with the increased points
+                currentNode.innerText = `${node.value}: ${(point)}`;
+                if(point>=1210)
+                {
+                    
+                    currentNode.innerText = `${node.value}: ${(point)}*`;
+                }
+                
+               
+            }
+
+            return { point };
+        }
+
+        const treeElement = document.getElementById('tree');
+        buildTree(treeData, treeElement);
+    </script>
+</body>
+
+</html>
